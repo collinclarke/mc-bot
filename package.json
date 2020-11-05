@@ -4,6 +4,7 @@
   "description": "Bot for azyros",
   "main": "index.js",
   "scripts": {
+    "launch": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/collinclarke/mc-bot/issues"
   },
-  "homepage": "https://github.com/collinclarke/mc-bot#readme"
+  "homepage": "https://github.com/collinclarke/mc-bot#readme",
+  "dependencies": {
+    "mineflayer": "^2.34.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
