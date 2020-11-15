@@ -2,9 +2,10 @@ require('dotenv').config()
 
 
 const mineflayer = require('mineflayer')
-const mineflayerViewer = require('prismarine-viewer').mineflayer
+//const mineflayerViewer = require('prismarine-viewer').mineflayer
 const { pathfinder, Movements } = require('mineflayer-pathfinder')
 const { GoalBlock, GoalFollow, GoalInvert, GoalNear, GoalXZ, GoalY } = require('mineflayer-pathfinder').goals
+const pvp = require('mineflayer-pvp').plugin
 
 const allowedUsers = {}
 
@@ -62,6 +63,8 @@ function login() {
 
 function setBehavior(bot) {
   bot.loadPlugin(pathfinder)
+  bot.loadPlugin(pvp)
+
   bot.on('login', function() {
     console.log("I logged in.");
     console.log("settings", bot.settings);
@@ -83,7 +86,8 @@ function setBehavior(bot) {
     authorize('coolknife')
     authorize('Banque')
     authorize('Yungsuuu')
-    mineflayerViewer(bot, { port: 3007 })
+    authorize('liamislord')
+    //mineflayerViewer(bot, { port: 3007 })
 
     // Once we've spawn, it is safe to access mcData because we know the version
     const mcData = require('minecraft-data')(bot.version)
@@ -103,6 +107,8 @@ function setBehavior(bot) {
     const chatFunctionality = (whisper) => (username, message) => {
       if (username === bot.username) return
       if (username === 'you') return
+      var splitmsg = message.split(' ')
+
       const respond = (answer) => {
         if (whisper) {
           bot.whisper(username, answer)
@@ -154,6 +160,27 @@ function setBehavior(bot) {
         respond('')
       }
 
+      if(message.startsWith('kill'))
+      {
+        const cmd = message.split(' ')
+        if(cmd.length > 1)
+        {
+          let killTarget = null;
+
+          if(cmd[1] == "me")
+            {
+              killTarget = target;
+            }
+            else killTarget  = bot.players[cmd[1]]
+
+            if(!killTarget)
+              return;
+
+            bot.pvp.attack(killTarget)
+        }
+      }
+
+
       if (message === 'come') {
         if (isTargetNull(bot)) return
         const p = target.position
@@ -194,6 +221,7 @@ function setBehavior(bot) {
         bot.pathfinder.setMovements(defaultMove)
         bot.pathfinder.setGoal(new GoalInvert(new GoalFollow(target, 5)), true)
       } else if (message === 'stop') {
+        bot.pvp.stop()
         bot.pathfinder.setGoal(null)
       }
   }
