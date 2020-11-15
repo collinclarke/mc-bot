@@ -4,9 +4,9 @@ const {
 	GoalBlock, GoalFollow, GoalInvert, GoalNear, GoalXZ, GoalY,
 } = goals
 import { generateDisobidienceMessage } from "src/Utilities/conversation";
-import BasicBot from "./BasicBot";
+import AuthenticatedBot from "./AuthenticatedBot";
 
-export default class NavigationBot extends BasicBot {
+export default class NavigationBot extends AuthenticatedBot {
   defaultMove: Movements;
 
   initPlugins() {
