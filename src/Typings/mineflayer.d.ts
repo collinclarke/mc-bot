@@ -17,6 +17,7 @@ import { Window } from "prismarine-windows";
 import { Recipe } from "prismarine-recipe";
 import { Block } from "prismarine-block";
 import { Entity } from "prismarine-entity";
+import { Pathfinder } from "mineflayer-pathfinder";
 
 export function createBot(options: BotOptions): Bot;
 
@@ -137,6 +138,8 @@ interface BotEvents {
   bossBarCreated: (bossBar: BossBar) => void;
   bossBarDeleted: (bossBar: BossBar) => void;
   bossBarUpdated: (bossBar: BossBar) => void;
+  'path_update': (r: any) => void;
+  'goal_reached': (goal: any) => void;
 }
 
 export class Bot extends (EventEmitter as new () => TypedEmitter<BotEvents>) {
@@ -377,6 +380,13 @@ export class Bot extends (EventEmitter as new () => TypedEmitter<BotEvents>) {
   waitForChunksToLoad(cb?: (err?: Error) => void): void;
 
   nearestEntity(filter?: (entity: Entity) => boolean): Entity | null;
+
+  pvp: {
+    attack(entity: Entity): void
+    stop(): void
+  }
+
+  pathfinder: Pathfinder
 }
 
 export interface GameState {

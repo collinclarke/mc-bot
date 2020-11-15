@@ -5,9 +5,7 @@
     "target": "es5",
     "baseUrl": "./",
     "paths": {
-      "*": [
-        "src/*",
-     ]
+      "mineflayer": ["./src/Typings/mineflayer.d.ts"] 
     }
   },
   "include": ["./src/**/*"]
