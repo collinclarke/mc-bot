@@ -1,7 +1,6 @@
 import * as dotenv from "dotenv";
+import CombatBot from "./Bots/CombatBot";
 dotenv.config()
-
-import BaseBot from './Bots/BaseBot'
 
 const USER_OPTIONS = {
 	host: process.env.AZYROS_ADDRESS,
@@ -9,7 +8,7 @@ const USER_OPTIONS = {
 	password: process.env.BOT_PASSWORD,
 }
 
-const currentBot = new BaseBot(USER_OPTIONS)
+const currentBot = new CombatBot(USER_OPTIONS)
 
 function initInput() {
 	process.stdin.resume()
