@@ -226,13 +226,10 @@ function launchBot(options) {
 
   bot.on('kicked', (reason) => {
     console.log('I got kicked for', reason, 'lol');
-    launchBot(USER_OPTIONS);
   });
 
   bot.on('error', (err) => {
     console.log(err);
-    bot.quit();
-    launchBot(USER_OPTIONS);
   });
 
   setBehavior(bot);
