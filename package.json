@@ -19,11 +19,15 @@
   "homepage": "https://github.com/collinclarke/mc-bot#readme",
   "dependencies": {
     "core-js": "^3.7.0",
+    "dotenv": "^8.2.0",
+    "minecraft-data": "^2.70.2",
     "mineflayer": "^2.34.0",
     "mineflayer-pathfinder": "^1.0.12",
     "mineflayer-pvp": "^1.0.2"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }
