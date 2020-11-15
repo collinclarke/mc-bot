@@ -14,3 +14,7 @@ ALLOW_LIST=yourusername,someoneelsesusername,etc```
 Recommend that you install eslint for vscode in order to get linting.
 
 If you are unsure about a new package or bit of code you are introducing, create a new branch and push it there first.
+
+
+WARNING: prismarine-viewer is not supported by all dev clients due to nodejs issues(?)
+The branch to launch a viewer is called `viewer` and should not be updated with critical code. (Push to `master` instead and then merge `master` into `viewer`)
