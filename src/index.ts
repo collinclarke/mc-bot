@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config()
+
 import BaseBot from './Bots/BaseBot'
 
 const USER_OPTIONS = {

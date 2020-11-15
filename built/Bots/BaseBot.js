@@ -10,6 +10,7 @@ var GoalBlock = mineflayer_pathfinder_1.goals.GoalBlock, GoalFollow = mineflayer
 var pvp = minecraftPvp.plugin;
 var BaseBot = /** @class */ (function () {
     function BaseBot(options) {
+        this.allowedUsers = {};
         this.responseDelay = 1000;
         this.options = options;
     }

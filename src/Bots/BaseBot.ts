@@ -11,7 +11,7 @@ const pvp = minecraftPvp.plugin
 
 export default class BaseBot {
   options: mineflayer.BotOptions
-  allowedUsers: Record<string, { listening: boolean }>
+  allowedUsers: Record<string, { listening: boolean }> = {}
   responseDelay: number = 1000
   public bot: mineflayer.Bot
   playerWhoMessaged: mineflayer.Player | null

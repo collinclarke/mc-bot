@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var dotenv = require("dotenv");
+dotenv.config();
 var BaseBot_1 = require("./Bots/BaseBot");
 var USER_OPTIONS = {
     host: process.env.AZYROS_ADDRESS,
