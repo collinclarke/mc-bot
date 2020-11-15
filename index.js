@@ -235,4 +235,30 @@ function launchBot(options) {
   setBehavior(bot);
 }
 
+function initInput() {
+  process.stdin.resume();
+  process.stdin.setEncoding('utf8');
+  console.log('Listening for input, Type quit or exit to end process, type start to relaunch bot');
+
+  function done() {
+    console.log('Now that process.stdin is paused, there is nothing more to do.');
+    process.exit();
+  }
+
+  process.stdin.on('data', (text) => {
+    switch (text.trim().toLowerCase()) {
+      case 'start':
+        launchBot(USER_OPTIONS);
+        break;
+      case 'exit':
+      case 'quit':
+        done();
+        break;
+      default:
+        console.log(text.trim().toLowerCase());
+    }
+  });
+}
+
+initInput();
 launchBot(USER_OPTIONS);
