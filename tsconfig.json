@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "./built",
+    "allowJs": true,
+    "target": "es5",
+    "baseUrl": "./",
+    "paths": {
+      "mineflayer": ["./src/Typings/mineflayer.d.ts"] 
+    }
+  },
+  "include": ["./src/**/*"]
+}

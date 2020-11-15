@@ -4,14 +4,16 @@
   "description": "Bot for azyros",
   "main": "index.js",
   "scripts": {
-    "launch": "node index.js",
+    "launch": "npm run build && npm run start",
+    "start": "node built/index.js",
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/collinclarke/mc-bot.git"
   },
-  "author": "Collin Clarke",
+  "author": "Collin Clarke, Mark Fingerhut, Nicolas KK",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/collinclarke/mc-bot/issues"
@@ -26,8 +28,11 @@
     "mineflayer-pvp": "^1.0.2"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/parser": "^4.7.0",
     "eslint": "^7.13.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "typescript": "^4.0.5"
   }
 }
