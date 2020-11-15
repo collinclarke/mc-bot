@@ -2,17 +2,18 @@ require('dotenv').config()
 
 
 const mineflayer = require('mineflayer')
-//const mineflayerViewer = require('prismarine-viewer').mineflayer
 const { pathfinder, Movements } = require('mineflayer-pathfinder')
 const { GoalBlock, GoalFollow, GoalInvert, GoalNear, GoalXZ, GoalY } = require('mineflayer-pathfinder').goals
 const pvp = require('mineflayer-pvp').plugin
 
 const allowedUsers = {}
 
-function authorize (username) {
-  allowedUsers[username] = {
-    listening: false
-  }
+function authorize (usernameList) {
+  usernameList.split(',').forEach((username) => {
+    allowedUsers[username] = {
+      listening: false
+    }
+  })
 }
 
 function deauthorize (username) {
@@ -82,12 +83,7 @@ function setBehavior(bot) {
   })
   
   bot.once('spawn', () => {
-    authorize('lilcollin')
-    authorize('coolknife')
-    authorize('Banque')
-    authorize('Yungsuuu')
-    authorize('liamislord')
-    //mineflayerViewer(bot, { port: 3007 })
+    authorize(process.env.ALLOW_LIST)
 
     // Once we've spawn, it is safe to access mcData because we know the version
     const mcData = require('minecraft-data')(bot.version)
