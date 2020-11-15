@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/collinclarke/mc-bot#readme",
   "dependencies": {
-    "mineflayer": "^2.34.0"
+    "core-js": "^3.6.5",
+    "mineflayer": "^2.34.0",
+    "mineflayer-pathfinder": "^1.0.12",
+    "prismarine-viewer": "^1.6.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0"
