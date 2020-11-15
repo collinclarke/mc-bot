@@ -11,7 +11,7 @@ const allowedUsers = {}
 function authorize (usernameList) {
   usernameList.split(',').forEach((username) => {
     allowedUsers[username] = {
-      listening: false
+      listening: true
     }
   })
 }
@@ -167,11 +167,14 @@ function setBehavior(bot) {
             {
               killTarget = target;
             }
-            else killTarget  = bot.players[cmd[1]]
+            else
+            {
+                const otherPlayer = bot.players[cmd[1]];
+                if(!otherPlayer)
+                 return;
 
-            if(!killTarget)
-              return;
-
+              killTarget = otherPlayer.entity     
+            } 
             bot.pvp.attack(killTarget)
         }
       }
