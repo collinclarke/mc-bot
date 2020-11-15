@@ -30,7 +30,7 @@ function listening(username) {
   return allowedUsers[username] && allowedUsers[username].listening;
 }
 
-function generateMessage() {
+function generateDisobidienceMessage() {
   const messageIndex = Math.floor(Math.random() * 10);
   const messages = [
     'leave me alone',
@@ -44,6 +44,24 @@ function generateMessage() {
     'why should i?',
     'who are you?',
     'you are not my friend',
+  ];
+  return messages[messageIndex];
+}
+
+function generateFeelingsMessage() {
+  const messageIndex = Math.floor(Math.random() * 10);
+  const messages = [
+    'leave me alone',
+    'dont talk to me',
+    'im good, how are you?',
+    'excited to explore Azyros',
+    'stfu',
+    'gfys',
+    'kys asap',
+    'ok quiet now',
+    'im depressed',
+    'im feeling alright...',
+    'im eager to actually do something...',
   ];
   return messages[messageIndex];
 }
@@ -88,12 +106,16 @@ function setBehavior(bot) {
         }
       };
 
+      if (message.toLowerCase().includes('how are you')) {
+        setTimeout(() => { respond(generateFeelingsMessage()); }, 1500);
+      }
+
       if (message.toLowerCase().includes('listen')) {
         const success = setListen(username, true, bot);
         if (success) {
           respond('ok sure whats up? try "come", "goto", "follow", "avoid", "stop"');
         } else {
-          respond(generateMessage());
+          respond(generateDisobidienceMessage());
         }
       }
 
@@ -135,10 +157,12 @@ function setBehavior(bot) {
 
           if (cmd[1] === 'me') {
             killTarget = target;
-          } else killTarget = bot.players[cmd[1]];
+          } else {
+            const otherPlayer = bot.players[cmd[1]];
+            if (!otherPlayer) { return; }
 
-          if (!killTarget) { return; }
-
+            killTarget = otherPlayer.entity;
+          }
           bot.pvp.attack(killTarget);
         }
       }
