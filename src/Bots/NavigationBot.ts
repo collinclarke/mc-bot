@@ -32,8 +32,8 @@ export default class NavigationBot extends AuthenticatedBot {
     return !this.currentTarget
   }
 
-  parseMessage(username: string, message: string, whisper?:boolean) {
-    super.parseMessage(username, message, whisper)
+  parseMessage(username: string, message: string, whisper?:boolean):boolean {
+    if (!super.parseMessage(username, message, whisper)) return false
     if (message === 'come') {
       if (this.noTarget) return
       const p = this.currentTarget.position

@@ -8,12 +8,14 @@ export default class AuthenticatedBot extends BasicBot {
     this.authorize(process.env.ALLOW_LIST)
   }
 
-  parseMessage(username: string, message: string, whisper: boolean) {
+  parseMessage(username: string, message: string, whisper: boolean): boolean {
     if (!this.isListening(username)) {
-      this.respond('I dont know you')
-      return
+      if (whisper) this.respond('I dont know you', username)
+      return false
+    } else {
+      super.parseMessage(username, message, whisper)
+      return true
     }
-    super.parseMessage(username, message, whisper)
   }
   
   private authorize (usernameList: string): void {

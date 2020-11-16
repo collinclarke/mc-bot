@@ -10,8 +10,8 @@ export default class CombatBot extends NavigationBot {
     super.initPlugins()
     this.bot.loadPlugin(pvp)
   }
-  parseMessage(username: string, message: string, whisper?:boolean) {
-    super.parseMessage(username, message, whisper)
+  parseMessage(username: string, message: string, whisper?:boolean): boolean {
+    if (!super.parseMessage(username, message, whisper)) return false
     if (message.startsWith('kill')) {
       const cmd = message.split(' ')
       if (cmd.length > 1) {
@@ -26,5 +26,6 @@ export default class CombatBot extends NavigationBot {
         this.bot.pvp.attack(killTarget)
       }
     }
+    return true
   }
 }

@@ -21,11 +21,13 @@ export default class BasicBot {
     initPlugins (): void {}
 
     public respond (answer: string, username?: string) {
-      if (username) {
-        this.bot.whisper(username, answer)
-      } else {
-        this.bot.chat(answer)
-      }
+      setTimeout(() => {
+        if (username) {
+          this.bot.whisper(username, answer)
+        } else {
+          this.bot.chat(answer)
+        }
+      }, Math.floor(Math.random() * 500))
     }
 
     setTarget (player?: mineflayer.Player) {
