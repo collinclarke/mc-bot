@@ -1,4 +1,6 @@
 import * as mineflayer from 'mineflayer'
+import { Vec3 } from "vec3";
+
 var blockFinderPlugin = require('mineflayer-blockfinder')(mineflayer);
 import { generateFeelingsMessage, isAskingWhereYouAre } from '../Utilities/conversation';
 
@@ -100,6 +102,26 @@ export default class BasicBot {
       this.bot.chat('/sn')
     }
 
+    public playMusic()
+    {
+      let y = this.bot.entity.position.y;
+      setInterval(()=>{
+        this.bot.stopDigging()
+        let rando = Math.floor(Math.random() * 5)
+        let rando2 = Math.floor(Math.random() * 5)
+      let block = this.bot.blockAt(new Vec3(rando,3,rando2));
+          if(!block)
+          {
+            console.log("did not find note block!")
+              return;
+          }
+
+
+            this.bot.dig(block, (err) => {})
+            
+          },10)
+           
+    }
 
     parseMessage(username:string, message: string, whisper?:boolean) {
       if (message.toLowerCase().includes('how are you')) {
@@ -109,6 +131,11 @@ export default class BasicBot {
       if(message.toLowerCase() == "sleep here"){
         this.findBed()
       }
+
+      if(message.toLowerCase() == "play music"){
+        this.playMusic()
+      }
+
 
       if (message.toLowerCase() == 'clan home'){
         this.clanHome()
