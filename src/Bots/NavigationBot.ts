@@ -3,10 +3,9 @@ import { Movements, pathfinder, goals } from "mineflayer-pathfinder";
 const {
 	GoalBlock, GoalFollow, GoalInvert, GoalNear, GoalXZ, GoalY,
 } = goals
-import { generateDisobidienceMessage } from "src/Utilities/conversation";
-import AuthenticatedBot from "./AuthenticatedBot";
+import BasicBot from "./BasicBot";
 
-export default class NavigationBot extends AuthenticatedBot {
+export default class NavigationBot extends BasicBot {
   defaultMove: Movements;
 
   initPlugins() {
@@ -28,14 +27,10 @@ export default class NavigationBot extends AuthenticatedBot {
     })
   }
 
-  get noTarget () {
-    return !this.currentTarget
-  }
-
-  parseMessage(username: string, message: string, whisper?:boolean):boolean {
-    if (!super.parseMessage(username, message, whisper)) return false
+  parseMessage(username: string, message: string, whisper?:boolean) {
+    super.parseMessage(username, message, whisper)
     if (message === 'come') {
-      if (this.noTarget) return true
+      if (this.noTarget) return
       const p = this.currentTarget.position
 
       this.bot.pathfinder.setMovements(this.defaultMove)
@@ -63,20 +58,18 @@ export default class NavigationBot extends AuthenticatedBot {
         this.bot.pathfinder.setGoal(new GoalY(y))
       }
     } else if (message === 'follow') {
-      if (this.noTarget) return true
+      if (this.noTarget) return
       this.bot.pathfinder.setMovements(this.defaultMove)
       this.bot.pathfinder.setGoal(new GoalFollow(this.currentTarget, 3), true)
       // follow is a dynamic goal: setGoal(goal, dynamic=true)
       // when reached, the goal will stay active and will not
       // emit an event
     } else if (message === 'avoid') {
-      if (this.noTarget) return true
+      if (this.noTarget) return
       this.bot.pathfinder.setMovements(this.defaultMove)
       this.bot.pathfinder.setGoal(new GoalInvert(new GoalFollow(this.currentTarget, 5)), true)
     } else if (message === 'stop') {
-      this.bot.pvp.stop()
       this.bot.pathfinder.setGoal(null)
     }
-    return true
   }
 }
