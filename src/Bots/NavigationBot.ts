@@ -35,7 +35,7 @@ export default class NavigationBot extends AuthenticatedBot {
   parseMessage(username: string, message: string, whisper?:boolean):boolean {
     if (!super.parseMessage(username, message, whisper)) return false
     if (message === 'come') {
-      if (this.noTarget) return
+      if (this.noTarget) return true
       const p = this.currentTarget.position
 
       this.bot.pathfinder.setMovements(this.defaultMove)
@@ -63,19 +63,20 @@ export default class NavigationBot extends AuthenticatedBot {
         this.bot.pathfinder.setGoal(new GoalY(y))
       }
     } else if (message === 'follow') {
-      if (this.noTarget) return
+      if (this.noTarget) return true
       this.bot.pathfinder.setMovements(this.defaultMove)
       this.bot.pathfinder.setGoal(new GoalFollow(this.currentTarget, 3), true)
       // follow is a dynamic goal: setGoal(goal, dynamic=true)
       // when reached, the goal will stay active and will not
       // emit an event
     } else if (message === 'avoid') {
-      if (this.noTarget) return
+      if (this.noTarget) return true
       this.bot.pathfinder.setMovements(this.defaultMove)
       this.bot.pathfinder.setGoal(new GoalInvert(new GoalFollow(this.currentTarget, 5)), true)
     } else if (message === 'stop') {
       this.bot.pvp.stop()
       this.bot.pathfinder.setGoal(null)
     }
+    return true
   }
 }
