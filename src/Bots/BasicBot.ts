@@ -36,14 +36,14 @@ export default class BasicBot {
       this.bot.on('chat', (username: string, message: string) => {
         if (username === this.bot.username) return
         if (username === 'you') return
-        this.parseMessage(username, message)
         this.setTarget(this.bot.players[username])
+        this.parseMessage(username, message)
       })
       this.bot.on('whisper', (username: string, message: string) => {
         if (username === this.bot.username) return
         if (username === 'you') return
-        this.parseMessage(username, message, true)
         this.setTarget(this.bot.players[username])
+        this.parseMessage(username, message, true)
       })
     }
 
