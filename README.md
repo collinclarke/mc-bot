@@ -12,6 +12,7 @@ ALLOW_LIST=yourusername,someoneelsesusername,etc```
 - Local LAN creative mode `.env` content:```BOT_USERNAME=any_name
 AZYROS_ADDRESS=localhost
 ALLOW_LIST=yourusername
+NICKNAME=friendlyname
 PORT=59595```
 
 

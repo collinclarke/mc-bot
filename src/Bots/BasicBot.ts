@@ -32,7 +32,7 @@ export default class BasicBot {
         } else {
           this.bot.chat(answer)
         }
-      }, Math.floor(Math.random() * 500))
+      },500+ Math.floor(Math.random() * 500))
     }
 
     setTarget (entity?: mineflayer.Player['entity']) {
@@ -93,7 +93,7 @@ export default class BasicBot {
       let y = this.bot.entity.position.y.toFixed().toString();
       let z = this.bot.entity.position.z.toFixed().toString();
 
-      this.bot.chat("I'm at " + x + " " + y + " " + z);
+      this.respond("I'm at " + x + " " + y + " " + z);
     }
 
     public skipNight () {
