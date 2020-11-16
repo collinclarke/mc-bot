@@ -188,7 +188,7 @@ export class Bot extends (EventEmitter as new () => TypedEmitter<BotEvents>) {
 
   canSeeBlock(block: Block): boolean;
 
-  findBlock(options: FindBlockOptions): Block;
+  findBlock(options: FindBlockOptions, b: (e: any, bl: any) => void): Block;
   
   findBlocks(options: FindBlockOptions): Block[];
 
