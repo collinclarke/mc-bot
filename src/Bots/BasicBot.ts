@@ -63,12 +63,19 @@ export default class BasicBot {
     }
 
     public findBed () {
-      this.bot.findBlock({
+    
+    let b =  this.bot.findBlock({
         point: this.bot.entity.position,
-        matching: 56,
+        matching: 26,
         maxDistance: 256,
         count: 1,
-      });
+      },(e,bl) =>{});
+      if(b)
+      {
+        this.bot.chat(b.position.toString());
+
+      }
+      
     }
 
     public clanHome () {
