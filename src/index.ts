@@ -6,6 +6,7 @@ const USER_OPTIONS = {
 	host: process.env.AZYROS_ADDRESS,
 	username: process.env.BOT_USERNAME,
 	password: process.env.BOT_PASSWORD,
+	port: Number(process.env.PORT)
 }
 
 const currentBot = new CombatBot(USER_OPTIONS)

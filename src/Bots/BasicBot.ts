@@ -8,7 +8,7 @@ export default class BasicBot {
     allowedUsers: Record<string, boolean> = {}
     public bot: mineflayer.Bot
 
-    constructor(options: {host: string, username: string, password: string}) {
+    constructor(options: {host: string, username: string, password?: string, port?: number}) {
       this.options = options
     }
 
