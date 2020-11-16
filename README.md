@@ -9,6 +9,11 @@ AZYROS_ADDRESS=206.221.176.213
 ALLOW_LIST=yourusername,someoneelsesusername,etc```
 - run `npm i`
 - run `npm run launch`
+- Local LAN creative mode `.env` content:```BOT_USERNAME=any_name
+AZYROS_ADDRESS=localhost
+ALLOW_LIST=yourusername
+NICKNAME=friendlyname
+PORT=59595```
 
 
 Recommend that you install eslint for vscode in order to get linting.

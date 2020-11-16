@@ -9,7 +9,7 @@ const {
 } = goals
 const pvp = minecraftPvp.plugin
 
-export default class BaseBot {
+export default class LegacyBot {
   options: mineflayer.BotOptions
   allowedUsers: Record<string, { listening: boolean }> = {}
   responseDelay: number = 1000

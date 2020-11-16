@@ -188,7 +188,7 @@ export class Bot extends (EventEmitter as new () => TypedEmitter<BotEvents>) {
 
   canSeeBlock(block: Block): boolean;
 
-  findBlock(options: FindBlockOptions): Block;
+  findBlock(options: FindBlockOptions, b: (e: any, bl: Block[]) => void): Block;
   
   findBlocks(options: FindBlockOptions): Block[];
 
@@ -232,7 +232,7 @@ export class Bot extends (EventEmitter as new () => TypedEmitter<BotEvents>) {
 
   sleep(bedBlock: Block, cb?: (err?: Error) => void): void;
 
-  isABed(bedBlock: Block): void;
+  isABed(bedBlock: Block): boolean;
 
   wake(cb?: (err?: Error) => void): void;
 
