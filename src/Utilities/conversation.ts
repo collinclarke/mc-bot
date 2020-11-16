@@ -33,3 +33,11 @@ export function generateFeelingsMessage(): string {
 	]
 	return messages[messageIndex]
 }
+
+export function isAskingWhereYouAre(msg : String) : boolean {
+	return msg.includes('wya') || 
+	msg.includes('where r u') ||
+	msg.includes('where are you') ||
+	msg.includes('where u at') ||
+	msg.includes('whats ur loc')
+}

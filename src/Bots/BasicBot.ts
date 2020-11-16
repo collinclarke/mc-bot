@@ -1,6 +1,6 @@
 import * as mineflayer from 'mineflayer'
 var blockFinderPlugin = require('mineflayer-blockfinder')(mineflayer);
-import { generateFeelingsMessage } from '../Utilities/conversation';
+import { generateFeelingsMessage, isAskingWhereYouAre } from '../Utilities/conversation';
 
 export default class BasicBot {
     options: mineflayer.BotOptions
@@ -66,21 +66,40 @@ export default class BasicBot {
     
     let b = this.bot.findBlock({
         point: this.bot.entity.position,
-        matching: 26,
+        matching: block => this.bot.isABed(block), // bed ids
         maxDistance: 256,
         count: 1,
-      },(e,bl) =>{});
+      },(e,bl) =>{
+        if(bl.length)
+        {
+          this.bot.chat(bl[0].position.toString());
+          this.bot.sleep(bl[0],(err)=>{
+            if(err)
+              this.bot.chat(err.toString());
+          })
+          //this.bot.chat(bl[0].position.toString());
+        }
+      });
 
-      if(b)
-      {
-        this.bot.chat(b.position.toString());
-      }
-      
     }
 
     public clanHome () {
       this.bot.chat('/clan home')
     }
+
+    public reportPosition()
+    {
+      let x = this.bot.entity.position.x.toFixed().toString();
+      let y = this.bot.entity.position.y.toFixed().toString();
+      let z = this.bot.entity.position.z.toFixed().toString();
+
+      this.bot.chat("I'm at " + x + " " + y + " " + z);
+    }
+
+    public skipNight () {
+      this.bot.chat('/sn')
+    }
+
 
     parseMessage(username:string, message: string, whisper?:boolean) {
       if (message.toLowerCase().includes('how are you')) {
@@ -93,6 +112,15 @@ export default class BasicBot {
 
       if (message.toLowerCase() == 'clan home'){
         this.clanHome()
+      }
+
+      if (message.toLowerCase() == 'skipnight'){
+        this.skipNight()
+      }
+
+      if(message.toLowerCase().includes(process.env.NICKNAME.toLowerCase()) && isAskingWhereYouAre(message.toLowerCase()))
+      {
+        this.reportPosition()
       }
     }
 
