@@ -22,6 +22,7 @@
   "dependencies": {
     "core-js": "^3.7.0",
     "dotenv": "^8.2.0",
+    "midi-player-js": "^2.0.13",
     "minecraft-data": "^2.70.2",
     "mineflayer": "^2.34.0",
     "mineflayer-blockfinder": "0.0.7",

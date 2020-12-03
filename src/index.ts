@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 import CombatBot from "./Bots/CombatBot";
+import MusicBot from "./Bots/MusicBot";
 dotenv.config()
 
 const USER_OPTIONS = {
@@ -9,7 +10,7 @@ const USER_OPTIONS = {
 	port: Number(process.env.PORT)
 }
 
-const currentBot = new CombatBot(USER_OPTIONS)
+const currentBot = new MusicBot(USER_OPTIONS)
 
 function initInput() {
 	process.stdin.resume()
@@ -32,7 +33,7 @@ function initInput() {
 			done()
 			break
 		default:
-			console.log(input)
+			currentBot.parseMessage(process.env.BOT_USERNAME,input);
 		}
 	})
 }
