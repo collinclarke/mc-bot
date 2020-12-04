@@ -3,10 +3,8 @@ import { Entity } from "prismarine-entity";
 import * as mineflayer from 'mineflayer'
 import { Vec3 } from 'vec3'
 
-export function GetBlockAtNotePosition(b:mineflayer.Bot, position: number) : Block
-{
-    if(position > noteblockKernel.length)
-    {
+export function GetSoundBlock(b: mineflayer.Bot, position: number, GetNoteBlock: boolean): Block {
+    if (position > noteblockKernel.length) {
         return null;
     }
 
@@ -15,47 +13,58 @@ export function GetBlockAtNotePosition(b:mineflayer.Bot, position: number) : Blo
     console.log(offset[0]);
     let botPos = b.entity.position;
     let modX = Math.floor(botPos.x) + offset[0];
-    let modY = Math.floor(botPos.y) - 2;
+    let modY = Math.floor(botPos.y) - (GetNoteBlock ? 1:2);
     let modZ = Math.floor(botPos.z) + offset[1];
     console.log("looking at " + modX + " " + modY + " " + modZ);
-    let block = b.blockAt(new Vec3(modX,modY,modZ));
-
-    return block;
+    let soundBlock = b.blockAt(new Vec3(modX, modY, modZ));
+    return soundBlock;
 }
+
+export function GetPitchAndInstrument(midiPitch: Number)
+{
+    var result = {
+        'pitch':5,
+        'instrument':'violin'
+    }
+
+    result.pitch = 500;
+    result.instrument = "bells";
+
+    return result;
+}
+
 export var noteblockKernel = [
-    [-2,-4],[-1,-4],  [0,-4], [1,-4],[2,-4],
-    [-3,-3],[-2,-3],[-1,-3],  [0,-3], [1,-3],[2,-3],[3,-3], 
-    [-4,-2],[-3,-2],[-2,-2],[-1,-2],  [0,-2], [1,-2],[2,-2],[3,-2],[4,-2],
-    [-4,-1],[-3,-1],[-2,-1],[-1,-1],  [0,-1], [1,-1],[2,-1],[3,-1],[4,-1], 
-    [-4, 0],[-3, 0],[-2, 0],[-1, 0],/*[0, 0]*/[1, 0],[2, 0],[3, 0],[4, 0], 
-    [-4, 1],[-3, 1],[-2, 1],[-1, 1],  [0, 1], [1, 1],[2, 1],[3, 1],[4, 1], 
-    [-4, 2],[-3, 2],[-2, 2],[-1, 2],  [0, 2], [1, 2],[2, 2],[3, 2],[4, 2],
-    [-3, 3],[-2, 3],[-1, 3],  [0, 3], [1, 3],[2, 3],[3, 3],
-    [-2, 4],[-1, 4],  [0, 4], [1, 4],[2, 4],
+    [-2, -4], [-1, -4], [0, -4], [1, -4], [2, -4],
+    [-3, -3], [-2, -3], [-1, -3], [0, -3], [1, -3], [2, -3], [3, -3],
+    [-4, -2], [-3, -2], [-2, -2], [-1, -2], [0, -2], [1, -2], [2, -2], [3, -2], [4, -2],
+    [-4, -1], [-3, -1], [-2, -1], [-1, -1], [0, -1], [1, -1], [2, -1], [3, -1], [4, -1],
+    [-4, 0], [-3, 0], [-2, 0], [-1, 0],/*[0, 0]*/[1, 0], [2, 0], [3, 0], [4, 0],
+    [-4, 1], [-3, 1], [-2, 1], [-1, 1], [0, 1], [1, 1], [2, 1], [3, 1], [4, 1],
+    [-4, 2], [-3, 2], [-2, 2], [-1, 2], [0, 2], [1, 2], [2, 2], [3, 2], [4, 2],
+    [-3, 3], [-2, 3], [-1, 3], [0, 3], [1, 3], [2, 3], [3, 3],
+    [-2, 4], [-1, 4], [0, 4], [1, 4], [2, 4],
 ];
 
-
-
 const Constants = {
-	VERSION: '2.0.13',
-	NOTES: [],
-	HEADER_CHUNK_LENGTH: 14,
-	CIRCLE_OF_FOURTHS: ['C', 'F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb', 'Cb', 'Fb', 'Bbb', 'Ebb', 'Abb'],
-	CIRCLE_OF_FIFTHS: ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'E#']
+    VERSION: '2.0.13',
+    NOTES: [],
+    HEADER_CHUNK_LENGTH: 14,
+    CIRCLE_OF_FOURTHS: ['C', 'F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb', 'Cb', 'Fb', 'Bbb', 'Ebb', 'Abb'],
+    CIRCLE_OF_FIFTHS: ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'E#']
 };
 
 // Builds notes object for reference against binary values.
-const allNotes = [['C'], ['C#','Db'], ['D'], ['D#','Eb'], ['E'],['F'], ['F#','Gb'], ['G'], ['G#','Ab'], ['A'], ['A#','Bb'], ['B']];
+const allNotes = [['C'], ['C#', 'Db'], ['D'], ['D#', 'Eb'], ['E'], ['F'], ['F#', 'Gb'], ['G'], ['G#', 'Ab'], ['A'], ['A#', 'Bb'], ['B']];
 var counter = 0;
 // All available octaves.
 
 for (let i = -1; i <= 9; i++) {
-	allNotes.forEach(noteGroup => {
-		noteGroup.forEach(note => Constants.NOTES[counter] = note + i);
-		counter ++;
-	});
+    allNotes.forEach(noteGroup => {
+        noteGroup.forEach(note => Constants.NOTES[counter] = note + i);
+        counter++;
+    });
 }
-export {Constants};
+export { Constants };
 
 
 /*   -4   -3  -2  -1  00  +1  +2  +3  +4
