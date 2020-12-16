@@ -1,9 +1,10 @@
 import MinecraftData = require("minecraft-data");
 import { Movements, pathfinder, goals } from "mineflayer-pathfinder";
 const {
-	GoalBlock, GoalFollow, GoalInvert, GoalNear, GoalXZ, GoalY,
+	GoalBlock, GoalFollow, GoalInvert, GoalNear, GoalXZ, GoalY, GoalGetToBlock
 } = goals
 import BasicBot from "./BasicBot";
+import { Vec3 } from "vec3";
 
 export default class NavigationBot extends BasicBot {
   defaultMove: Movements;
@@ -71,5 +72,11 @@ export default class NavigationBot extends BasicBot {
     } else if (message === 'stop') {
       this.bot.pathfinder.setGoal(null)
     }
+  }
+
+  goTo(p: Vec3){       
+    this.bot.pathfinder.setMovements(this.defaultMove)
+    this.bot.pathfinder.setGoal(new GoalNear(p.x, p.y, p.z, 3))
+    console.log("Going to buildspot")
   }
 }

@@ -18,6 +18,9 @@ import { Recipe } from "prismarine-recipe";
 import { Block } from "prismarine-block";
 import { Entity } from "prismarine-entity";
 import { Pathfinder } from "mineflayer-pathfinder";
+import { CollectBlock, Callback, CollectOptions } from "mineflayer-collectblock";
+import { Collectable } from "mineflayer-collectblock/lib/Targets";
+
 
 export function createBot(options: BotOptions): Bot;
 
@@ -385,7 +388,12 @@ export class Bot extends (EventEmitter as new () => TypedEmitter<BotEvents>) {
     attack(entity: Entity): void
     stop(): void
   }
+  collectPlugin: {
+    collect(target: Collectable | Collectable[], options?: CollectOptions | Callback, cb?: Callback): void;
+    //chestLocations: Vec3[];
 
+  }
+  collectBlock: CollectBlock
   pathfinder: Pathfinder
 }
 

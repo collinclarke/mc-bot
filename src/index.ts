@@ -1,5 +1,7 @@
 import * as dotenv from "dotenv";
 import CombatBot from "./Bots/CombatBot";
+import EmergenceBot from "./Bots/EmergenceBot";
+import NavigationBot from "./Bots/NavigationBot";
 dotenv.config()
 
 const USER_OPTIONS = {
@@ -9,7 +11,7 @@ const USER_OPTIONS = {
 	port: Number(process.env.PORT)
 }
 
-const currentBot = new CombatBot(USER_OPTIONS)
+const currentBot = new EmergenceBot(USER_OPTIONS)
 
 function initInput() {
 	process.stdin.resume()
