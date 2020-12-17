@@ -34,7 +34,7 @@ function initInput() {
 			done()
 			break
 		default:
-			console.log(input)
+			currentBot.parseMessage(process.env.BOT_USERNAME,input);
 		}
 	})
 }
