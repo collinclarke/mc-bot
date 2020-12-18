@@ -76,7 +76,7 @@ export default class NavigationBot extends BasicBot {
 
   goTo(p: Vec3){       
     this.bot.pathfinder.setMovements(this.defaultMove)
-    this.bot.pathfinder.setGoal(new GoalNear(p.x, p.y, p.z, 3))
+    this.bot.pathfinder.setGoal(new GoalNear(p.x, p.y, p.z, 4))
     console.log("Going to buildspot")
   }
 }
